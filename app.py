@@ -81,6 +81,5 @@ def mail_debug():
 if __name__ == "__main__":
 
 # --- PORTA BACK ---
-
-    app.run(debug=True, port=5500)
-
+    
+    app.run(debug=True, host="0.0.0.0")
