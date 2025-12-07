@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_mail import Mail
@@ -27,13 +28,13 @@ app.config.update(
     MAIL_DEFAULT_SENDER=("Aether Digital", "aetherdigital.sev@gmail.com"),
 
 # --- URL'S ---
-    BACKEND_BASE_URL="http://localhost:5500/",
-    VERIF_SUCCESS_URL="http://localhost:3000/sign?ok=1", 
+    BACKEND_BASE_URL=os.environ.get("BACKEND_BASE_URL", "http://localhost:5500/"),
+    VERIF_SUCCESS_URL=os.environ.get("VERIF_SUCCESS_URL", "http://localhost:3000/sign?ok=1"),
+    BULK_SEND_URL=os.environ.get("BULK_SEND_URL", "http://localhost:5500/bulk/send-newest"),
+
 
 # --- TOKEN UNICO ---
     SECRET_KEY="um-segredo-forte",
-
-    BULK_SEND_URL=os.environ.get("BULK_SEND_URL", "http://localhost:5500/bulk/send-newest"),
 )
 
 # --- CORS AUTO ---
