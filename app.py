@@ -28,13 +28,12 @@ app.config.update(
 
 # --- URL'S ---
     BACKEND_BASE_URL="http://localhost:5500/",
-    VERIF_SUCCESS_URL="http://localhost:3000/sign?ok=1",  
+    VERIF_SUCCESS_URL="http://localhost:3000/sign?ok=1", 
 
 # --- TOKEN UNICO ---
     SECRET_KEY="um-segredo-forte",
 
-
-    BULK_SEND_URL="http://localhost:5500/bulk/send-newest",
+    BULK_SEND_URL=os.environ.get("BULK_SEND_URL", "http://localhost:5500/bulk/send-newest"),
 )
 
 # --- CORS AUTO ---
@@ -78,8 +77,8 @@ def mail_debug():
         "VERIF_SUCCESS_URL": app.config.get("VERIF_SUCCESS_URL"),
     })
 
-if __name__ == "__main__":
-
 # --- PORTA BACK ---
     
-    app.run(debug=True, host="0.0.0.0")
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
